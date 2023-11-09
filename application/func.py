@@ -10,7 +10,7 @@ def json_data_to_pandas_df(api_url):
     '''Konverterar JSON-data till en pandas DataFrame.'''
     try:
         context = ssl._create_unverified_context()
-        json_data = request.urlopen(api_url, context=context).read() # Läs JSON-data från den angivna URL:en
+        json_data = request.urlopen(api_url, context=context).read()  # Läs JSON-data från den angivna URL:en
         data = json.loads(json_data)  # Konvertera JSON-data till ett Python-dictionary
         df = pd.DataFrame(data)  # Skapar en pandas DataFrame från det konverterade data
         return df
@@ -23,9 +23,15 @@ def pandas_df_to_html_table(api_url, columns=None):
     '''Konverterar en pandas DataFrame till en HTML-tabell'''
     try:
         df = json_data_to_pandas_df(api_url)
+
+        if type(df) == error.HTTPError:
+
+            return "OBS: Morgondagens elpriser publiceras runt kl 13.00 varje dag"
+
         # Ta bort vissa kolumner (EXR och Time_end) från DataFrame
         df.drop(df.columns[2], axis=1, inplace=True)
         df.drop(df.columns[3], axis=1, inplace=True)
+
 
         # Ändrar namnen på kolumnerna
         df.columns = ["SEK per KWH", "EUR per KWH", "Tid"]
@@ -42,8 +48,8 @@ def pandas_df_to_html_table(api_url, columns=None):
         else:
             table_data = df.to_html(columns=columns, classes="table p-5", justify="left")
 
-        return table_data # Returnera den skapade HTML-tabellen
-    except error.HTTPError as e: # Hantera eventuella fel som kan uppstå under bearbetningen av data
+        return table_data  # Returnera den skapade HTML-tabellen
+    except error.HTTPError as e:  # Hantera eventuella fel som kan uppstå under bearbetningen av data
         return e
     except Exception as e:
         return e
