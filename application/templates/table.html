@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <h1 class="text-center">Elpriser {{date}} för prisklass: {{priceclass}}</h1>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-11">
+            {{ table|safe }}
+        </div>
+    </div>
+</div>
+<div class="container">
+    <a class="btn btn-primary mt-5 mb-5" href="/form" role="button">Tillbaka till startsidan</a>
+</div>
+{% endblock %}

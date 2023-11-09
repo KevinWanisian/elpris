@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row p-5">
+        <div class="col-1"></div>
+        <div class="col-10 border p-3">
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+                Vänligen fyll i datum!
+            </div>
+            {% endif %}
+            <h3>Sök efter elpriser</h3><br>
+            <form action="api" method="post">
+                <label for="date">Ange datum:</label><br/>
+                <input type="date" name="date" id="date" min="2022-11-01" max={{max_date}} placeholder="{{placeholder}}"/><br/>
+                <label for="prisklass">Ange prisklass:</label><br/>
+                <select class="form-select" aria-label="Default select example" name="prisklass" id="prisklass">
+                    <option value="SE1">SE1, Luleå / Norra Sverige</option>
+                    <option value="SE2">SE2, Sundsvall / Norra Mellansverige</option>
+                    <option value="SE3">SE3, Stockholm / Södra Mellansverige</option>
+                    <option value="SE4">SE4, Malmö / Södra Sverige</option>
+                </select><br/>
+                <button type="submit" class="btn btn-primary mt-5">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
