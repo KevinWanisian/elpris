@@ -4,6 +4,8 @@ from application import func
 app = Flask(__name__)
 
 
+
+
 @app.route("/")
 def index():
     '''Hanterar anrop till roten av applikationen.'''
