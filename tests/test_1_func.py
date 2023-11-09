@@ -33,5 +33,6 @@ def test_pandas_html():
 
 def test_max_date():
     """Detta testar datumet"""
-    max_date = func.get_max_date()
-    assert len(max_date) == 10
+    max_date = func.get_max_date()  # Hämta det maximala datumet från funktionen get_max_date
+    assert len(max_date) == 10  # Kontrollera om längden av det maximala datumet är 10 tecken
+
